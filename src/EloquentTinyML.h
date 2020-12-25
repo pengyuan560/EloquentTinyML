@@ -2,10 +2,12 @@
 
 #include <Arduino.h>
 #include <math.h>
-#include "tensorflow/lite/version.h"
-#include "tensorflow/lite/micro/kernels/all_ops_resolver.h"
+#define TF_LITE_REPORT_ERROR(...)
+#include "tensorflow/lite/micro/all_ops_resolver.h"
 #include "tensorflow/lite/micro/micro_error_reporter.h"
 #include "tensorflow/lite/micro/micro_interpreter.h"
+#include "tensorflow/lite/schema/schema_generated.h"
+#include "tensorflow/lite/version.h"
 
 
 namespace Eloquent {
@@ -37,7 +39,7 @@ namespace Eloquent {
              */
             bool begin(const unsigned char *modelData) {
                 static tflite::MicroErrorReporter microReporter;
-                static tflite::ops::micro::AllOpsResolver resolver;
+                static tflite::AllOpsResolver resolver;
 
                 Serial.println("Start");
 
